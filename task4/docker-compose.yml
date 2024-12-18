@@ -13,3 +13,5 @@ services:
     image: front-end-image
     ports:
       - "8888:9000"
+    depends_on:
+      - back-end

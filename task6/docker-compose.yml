@@ -5,23 +5,25 @@ services:
       dockerfile: Dockerfile
     expose:
       - "5252"
-    image: t5-back-end-image
+    image: t6-back-end-image
+    deploy:
+      replicas: 2
 
   front-end:
     build:
       context: ./front-end
       dockerfile: Dockerfile
-    image: t5-front-end-image
+    image: t6-front-end-image
     expose:
       - "9000"
     depends_on:
       - back-end
 
-  proxy:
+  proxy-t6:
     build:
       context: ./proxy
       dockerfile: Dockerfile
-    image: t5-proxy-image
+    image: t6-proxy-image
     ports:
       - "80:80"
     depends_on:

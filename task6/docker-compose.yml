@@ -6,8 +6,6 @@ services:
     expose:
       - "5252"
     image: t6-back-end-image
-    deploy:
-      replicas: 2
 
   front-end:
     build:
@@ -17,7 +15,8 @@ services:
     expose:
       - "9000"
     depends_on:
-      - back-end
+      back-end:
+        condition: service_started
 
   proxy-t6:
     build:
@@ -27,5 +26,7 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - back-end
-      - front-end
+      back-end:
+        condition: service_started
+      front-end:
+        condition: service_started
